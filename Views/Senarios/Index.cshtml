@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MetaModelCoreApp.Models.Senarios>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClimateSenarioScale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EconomicSenarioScale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenarioName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScenarioCombineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClimateImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EconomicImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClimateSenarioScale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EconomicSenarioScale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenarioName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScenarioCombineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClimateImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EconomicImage)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

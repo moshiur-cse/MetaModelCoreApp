@@ -1,0 +1,54 @@
+﻿@model MetaModelCoreApp.Models.Senarios
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Senarios</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClimateSenarioScale)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClimateSenarioScale)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EconomicSenarioScale)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EconomicSenarioScale)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SenarioName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SenarioName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScenarioCombineName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScenarioCombineName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClimateImage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClimateImage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EconomicImage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EconomicImage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

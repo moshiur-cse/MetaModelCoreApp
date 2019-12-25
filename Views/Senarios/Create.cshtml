@@ -1,0 +1,58 @@
+﻿@model MetaModelCoreApp.Models.Senarios
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Senarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClimateSenarioScale" class="control-label"></label>
+                <input asp-for="ClimateSenarioScale" class="form-control" />
+                <span asp-validation-for="ClimateSenarioScale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EconomicSenarioScale" class="control-label"></label>
+                <input asp-for="EconomicSenarioScale" class="form-control" />
+                <span asp-validation-for="EconomicSenarioScale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SenarioName" class="control-label"></label>
+                <input asp-for="SenarioName" class="form-control" />
+                <span asp-validation-for="SenarioName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScenarioCombineName" class="control-label"></label>
+                <input asp-for="ScenarioCombineName" class="form-control" />
+                <span asp-validation-for="ScenarioCombineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClimateImage" class="control-label"></label>
+                <input asp-for="ClimateImage" class="form-control" />
+                <span asp-validation-for="ClimateImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EconomicImage" class="control-label"></label>
+                <input asp-for="EconomicImage" class="form-control" />
+                <span asp-validation-for="EconomicImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
