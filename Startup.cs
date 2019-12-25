@@ -29,16 +29,28 @@ namespace MetaModelCoreApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-
-            services.AddMvc();
-
-            //Fetching Connection string from APPSETTINGS.JSON  
-
-            //Entity Framework  
-           
-            services.AddDbContext<MetaModelDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc(setupAction =>
+            {
+                setupAction.EnableEndpointRouting = false;
+            }).AddJsonOptions(jsonOptions =>
+            {
+                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
+
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddControllersWithViews();
+
+
+        //    services.AddMvc();
+
+        //    //Fetching Connection string from APPSETTINGS.JSON  
+
+        //    //Entity Framework  
+
+        //    services.AddDbContext<MetaModelDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+        //}
 
 
 
