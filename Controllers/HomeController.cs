@@ -6,22 +6,54 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MetaModelCoreApp.Models;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace MetaModelCoreApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly metamodel_db_testContext _context;
+
+        public HomeController(metamodel_db_testContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        //public IActionResult Index()
+        //{
+
+        //    return View();
+        //}
+
+        public async Task<IActionResult> Index(int? filter, int pageIndex = 1, string sortExpression = "RunCode")
         {
-            return View();
+
+            ViewBag.Senario = _context.Senarios.ToList();
+
+            var qry = _context.CropLoss.Take(100);
+
+            if (filter != null)
+            {
+                qry = qry.Where(p => p.RunCode == filter);
+            }
+
+            var model = await PagingList.CreateAsync(qry,10,pageIndex, sortExpression, "RunCode");
+
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+
+            return View(model);
+
+            //return View(await pdbDbContext.ToListAsync());
         }
+
 
         public IActionResult Privacy()
         {

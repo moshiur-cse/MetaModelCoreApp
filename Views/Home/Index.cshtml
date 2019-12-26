@@ -1,8 +1,254 @@
-﻿@{
+﻿@model ReflectionIT.Mvc.Paging.PagingList<MetaModelCoreApp.Models.CropLoss>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+@*@{
+        ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+
+    <link href="~/css/datastyle.css" rel="stylesheet" />
+
+    <style type="text/css">
+
+        table.table {
+            table-layout: fixed;
+        }
+
+            table.table tr th,
+            table.table tr td {
+                border-color: #e9e9e9;
+            }
+
+            table.table th {
+                min-width: 80px;
+            }
+
+                table.table th:last-child {
+                    width: 100px;
+                }
+
+                table.table th i {
+                    font-size: 13px;
+                    margin: 0 5px;
+                    cursor: pointer;
+                }
+
+            table.table td a {
+                cursor: pointer;
+                display: inline-block;
+                margin: 0 5px;
+                min-width: 24px;
+            }
+
+                table.table td a.add {
+                    color: #27C46B;
+                }
+
+                table.table td a.edit {
+                    color: #FFC107;
+                }
+
+                table.table td a.delete {
+                    color: #E34724;
+                }
+
+            table.table td i {
+                font-size: 19px;
+            }
+
+            table.table td a.add i {
+                font-size: 24px;
+                margin-right: -1px;
+                position: relative;
+                top: 3px;
+            }
+
+
+            table.table .form-control {
+                width: 100%;
+                padding: 2px 5px;
+                line-height: 1.0;
+            }
+
+                table.table .form-control.error {
+                    border-color: #f50000;
+                }
+
+            table.table td .add {
+                display: none;
+            }
+
+        .rotate {
+            /* Safari */
+            -webkit-transform: rotate(-90deg);
+            /* Firefox */
+            -moz-transform: rotate(-90deg);
+            /* IE */
+            -ms-transform: rotate(-90deg);
+            /* Opera */
+            -o-transform: rotate(-90deg);
+            float: left;
+        }
+    </style>
+
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="mr-1" style="background-color:#CBE7D3">
+            Selection Panel
+            @*@foreach (Senarios scrs in ViewBag.Senario)
+            {
+                <p>Climate: <img width="50" height="50" src=@scrs.ClimateImage /> + Economic: <img width="50" height="50" src=@scrs.EconomicImage /> = @scrs.SenarioName</p>
+
+            }*@
+
+            <table id="multi-form-view" class="table multi-form-view">
+                <tr>
+                    <td style="text-align:center"></td>
+                    <td style="text-align:center"></td>
+                    <td colspan="1" style="text-align:center">Economic</td>
+                    <td style="text-align:center"></td>
+
+                </tr>
+
+                @*<tr>
+
+                        <td rowspan="4" valign="middle"><p class="rotate">Climate</p></td>
+
+                    </tr>*@
+                <tr>
+                    <td style="text-align:center"></td>
+                    <td style="text-align:center;;vertical-align: middle">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="Productive">
+                            <label class="form-check-label" for="Productive">Productive</label>
+                        </div>@*<input type="checkbox" value="Productive" />*@
+                    </td>
+                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_high.png" /></td>
+                    <td style="text-align:center;vertical-align: middle">
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="Resilent">
+                            <label class="form-check-label" for="Resilent">Resilent</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    @*<td><label class="rotate">Climate</label></td>*@
+                    <td style="text-align:center;vertical-align: middle">Climate</td>
+                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/low.png" /></td>
+                    <td></td>
+                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/high.png" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center"></td>
+                    <td style="text-align:center;vertical-align: middle">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="Moderate">
+                            <label class="form-check-label" for="Moderate">Moderate</label>
+                        </div>
+                    </td>
+                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_low.png" /></td>
+                    <td style="        text-align: center;
+        vertical-align: middle
+">
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="Active">
+                            <label class="form-check-label" for="Active">Active</label>
+                        </div>
+
+                        
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-8">
+        <div class="mr-1" style="background-color:#CBE7D3">
+            <div class="form-view" id="updatePanel">
+
+
+
+                <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
+                    <div class="float-md-right" style="margin-bottom:5px">
+                        <form method="get" class="form-inline">
+                            <input name="filter" class="form-control" placeholder="filter"
+                                   value="@Model.RouteValue["Filter"]" />
+                            <button type="submit" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+                            </button>
+                        </form>
+                    </div>
+                    @*upz_code, collected_date, run_code, crop_type_id,indicator_code,indicator_value,loss_type_id*@
+                    <table id="multi-form-view" class="table table-responsive multi-form-view">
+                        <thead>
+                            <tr>
+                                <th>Upazila Code</th>
+                                <th>Collected Date</th>
+                                <th>Run Code</th>
+                                <th>Crop Type</th>
+                                <th>Indicator Code</th>
+                                <th>Indicator Value</th>
+                                <th>Loss Type</th>
+
+
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UpzCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CollectedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RunCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CropType.CropTypeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IndicatorCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IndicatorValue)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LossType.LossTypeName)
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                    <div style="text-align: center;">
+                        <vc:pager paging-list="@Model" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
