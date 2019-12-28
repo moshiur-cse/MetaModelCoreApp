@@ -106,92 +106,112 @@
 
 <div class="row">
     <div class="col-md-4">
-
         <div class="mr-1" style="background-color:#CBE7D3">
-            Selection Panel
-            @*@foreach (Senarios scrs in ViewBag.Senario)
-            {
-                <p>Climate: <img width="50" height="50" src=@scrs.ClimateImage /> + Economic: <img width="50" height="50" src=@scrs.EconomicImage /> = @scrs.SenarioName</p>
+            <div class="form-view" id="updatePanel">
+                <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
 
-            }*@
-
-            <table id="multi-form-view" class="table multi-form-view">
-                <tr>
-                    <td style="text-align:center"></td>
-                    <td style="text-align:center"></td>
-                    <td colspan="1" style="text-align:center">Economic</td>
-                    <td style="text-align:center"></td>
-
-                </tr>
-
-                @*<tr>
-
-                        <td rowspan="4" valign="middle"><p class="rotate">Climate</p></td>
-
-                    </tr>*@
-                <tr>
-                    <td style="text-align:center"></td>
-                    <td style="text-align:center;;vertical-align: middle">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="Productive">
-                            <label class="form-check-label" for="Productive">Productive</label>
-                        </div>@*<input type="checkbox" value="Productive" />*@
-                    </td>
-                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_high.png" /></td>
-                    <td style="text-align:center;vertical-align: middle">
-                    
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="Resilent">
-                            <label class="form-check-label" for="Resilent">Resilent</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    @*<td><label class="rotate">Climate</label></td>*@
-                    <td style="text-align:center;vertical-align: middle">Climate</td>
-                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/low.png" /></td>
-                    <td></td>
-                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/high.png" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align:center"></td>
-                    <td style="text-align:center;vertical-align: middle">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="Moderate">
-                            <label class="form-check-label" for="Moderate">Moderate</label>
-                        </div>
-                    </td>
-                    <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_low.png" /></td>
-                    <td style="        text-align: center;
-        vertical-align: middle
-">
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="Active">
-                            <label class="form-check-label" for="Active">Active</label>
-                        </div>
-
-                        
-                    </td>
-                </tr>
+                    <div class="mr-1">
+                        <h3>Choose Senarios</h3>
 
 
-            </table>
+                        @*<table id="multi-form-view" class="table multi-form-view" >*@
+                        <table>
+                            <tr>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center"></td>
+                                <td colspan="1" style="text-align:center">Economic</td>
+                                <td style="text-align:center"></td>
+
+                            </tr>
 
 
+                            <tr>
+                                <td style="text-align:center"></td>
+                                <td style="text-align:center;vertical-align: middle">
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="Productive">
+                                        <label class="custom-control-label" for="Productive" data-toggle="tooltip" data-placement="top" title="Productive">Productive</label>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_high.png" /></td>
+                                <td style="text-align: center; vertical-align: middle ">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="Resilent">
+                                        <label class="custom-control-label" for="Resilent" data-toggle="tooltip" data-placement="top" title="Resilent">Resilent</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                @*<td><label class="rotate">Climate</label></td>*@
+                                <td style="text-align:center;vertical-align: middle">Climate</td>
+                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/low.png" /></td>
+                                <td><img height="50" width="80" src="~/images/xy.png" /></td>
 
 
+                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/high.png" /></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center"></td>
+                                <td style="text-align:center;vertical-align: middle">
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="Moderate">
+                                        <label class="custom-control-label" for="Moderate" data-toggle="tooltip" data-placement="top" title="Moderate">Moderate</label>
+                                    </div>
+
+                                </td>
+                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_low.png" /></td>
+                                <td style="text-align: center;vertical-align: middle">
+
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="Active">
+                                        <label class="custom-control-label" for="Active" data-toggle="tooltip" data-placement="top" title="Active">Active</label>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+                    </div>
+                    <div class="mr-1">
+                        <h3>Stretegy</h3>
+                        <select class="form-control">
+
+                            @foreach (Strategies aStrategy in ViewBag.Strategy)
+                            {
+                                <option>@aStrategy.StategiesCode : @aStrategy.StrategyName</option>
+                            }
+
+
+                        </select>
+
+                    </div>
+
+                    <div class="mr-1">
+                        <h3>Goals</h3>
+
+                        @foreach (BdpGoals aStrategy in ViewBag.Goals)
+                        {
+                            <div class="custom-control custom-checkbox float-left mr-1">
+                                <input type="checkbox" class="custom-control-input" id="@aStrategy.BdpGoalsCode">
+                                <label class="custom-control-label" for="@aStrategy.BdpGoalsCode" data-toggle="tooltip" data-placement="top" title="@aStrategy.BdpGoalsName">@aStrategy.BdpGoalsCode</label>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
         </div>
-
     </div>
-
 
     <div class="col-md-8">
         <div class="mr-1" style="background-color:#CBE7D3">
             <div class="form-view" id="updatePanel">
-
-
-
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="float-md-right" style="margin-bottom:5px">
                         <form method="get" class="form-inline">
@@ -203,7 +223,7 @@
                         </form>
                     </div>
                     @*upz_code, collected_date, run_code, crop_type_id,indicator_code,indicator_value,loss_type_id*@
-                    <table id="multi-form-view" class="table table-responsive multi-form-view">
+                    <table id="multi-form-view" class="table table-responsive multi-form-view" style="border:0!important">
                         <thead>
                             <tr>
                                 <th>Upazila Code</th>
