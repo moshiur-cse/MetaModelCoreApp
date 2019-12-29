@@ -103,7 +103,7 @@ body {
     }
 
     body.show-left .footer {
-        padding-left: 250px;
+        /*padding-left: 250px;*/
     }
 
     body.collapsed-menu .footer {
@@ -145,7 +145,7 @@ body {
 @media (min-width: 992px) {
     .footer,
     body.show-left .footer {
-        padding-left: 250px;
+        /*padding-left: 250px;*/
     }
 
     body.collapsed-menu .footer {
