@@ -4,18 +4,17 @@
 
 
 @*@{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
+           ViewData["Title"] = "Index";
+           Layout = "~/Views/Shared/_Layout.cshtml";
     }*@
-
 
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@section Styles {
 
+@section Styles {
     <link href="~/css/datastyle.css" rel="stylesheet" />
 
     <style type="text/css">
@@ -73,7 +72,6 @@
                 top: 3px;
             }
 
-
             table.table .form-control {
                 width: 100%;
                 padding: 2px 5px;
@@ -99,31 +97,30 @@
             -o-transform: rotate(-90deg);
             float: left;
         }
+
+        .highlight {
+            background: #3297FD;
+            /*width:250px;*/
+        }
     </style>
-
 }
-
 
 <div class="row">
     <div class="col-md-4">
-        <div class="mr-1" style="background-color:#CBE7D3">
+        <div class="mr-1">
             <div class="form-view" id="updatePanel">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
-
                     <div class="mr-1">
                         <h3>Choose Senarios</h3>
-
-
                         @*<table id="multi-form-view" class="table multi-form-view" >*@
                         <table>
                             <tr>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center"></td>
-                                <td colspan="1" style="text-align:center">Economic</td>
-                                <td style="text-align:center"></td>
-
+                                <td width="250px" style="text-align:center;"></td>
+                                <td width="250px" style="text-align:center"></td>
+                                <td width="250px" colspan="1" style="text-align:center">Economic</td>
+                                <td width="250px" style="text-align:center"></td>
+                                <td width="250px" style="text-align:center"></td>
                             </tr>
-
 
                             <tr>
                                 <td style="text-align:center"></td>
@@ -134,50 +131,60 @@
                                         <label class="custom-control-label" for="Productive" data-toggle="tooltip" data-placement="top" title="Productive">Productive</label>
                                     </div>
                                 </td>
-                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_high.png" /></td>
+                                
+                                <td style="text-align: center;" id="e_high"><img width="50" height="50" src="~/images/e_high.png" /></td>
                                 <td style="text-align: center; vertical-align: middle ">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="Resilent">
                                         <label class="custom-control-label" for="Resilent" data-toggle="tooltip" data-placement="top" title="Resilent">Resilent</label>
                                     </div>
                                 </td>
+                                <td style="text-align:center"></td>
                             </tr>
                             <tr>
                                 @*<td><label class="rotate">Climate</label></td>*@
                                 <td style="text-align:center;vertical-align: middle" class="rotate">Climate</td>
-                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/low.png" /></td>
+                                <td style="text-align: center;" id="c_low"><img width="50" height="50" src="~/images/c_low.png" /></td>
                                 <td><img height="50" width="80" src="~/images/xy.png" /></td>
-
-
-                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/high.png" /></td>
+                                <td style="text-align: center;" id="c_high"><img width="50" height="50" src="~/images/c_high.png" /></td>
+                                <td style="text-align:center;vertical-align: middle" class="rotate">Climate</td>
                             </tr>
+
                             <tr>
                                 <td style="text-align:center"></td>
                                 <td style="text-align:center;vertical-align: middle">
-
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="Moderate">
                                         <label class="custom-control-label" for="Moderate" data-toggle="tooltip" data-placement="top" title="Moderate">Moderate</label>
                                     </div>
-
                                 </td>
-                                <td style="text-align: center;"><img width="50" height="50" src="https://raw.githubusercontent.com/moshiur-cegis/MetamodelTest/master/e_low.png" /></td>
+                                <td style="text-align: center;" id="e_low"><img width="50" height="50" src="~/images/e_low.png" /></td>
                                 <td style="text-align: center;vertical-align: middle">
-
-
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="Active">
                                         <label class="custom-control-label" for="Active" data-toggle="tooltip" data-placement="top" title="Active">Active</label>
                                     </div>
-
-
                                 </td>
+                                <td style="text-align:center"></td>
                             </tr>
 
+                            <tr>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center"></td>
+                                <td colspan="1" style="text-align:center">Economic</td>
+                                <td style="text-align:center"></td>
+                                <td style="text-align:center"></td>
+                            </tr>
 
                         </table>
 
                     </div>
+
+
+                </div>
+            </div>
+            <div class="form-view" id="updatePanel" style="margin-top:5px">
+                <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
                         <h3>Stretegy</h3>
                         <select class="form-control">
@@ -191,7 +198,10 @@
                         </select>
 
                     </div>
-
+                </div>
+            </div>
+            <div class="form-view" id="updatePanel" style="margin-top:5px">
+                <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
                         <h3>Goals</h3>
 
@@ -203,14 +213,13 @@
                             </div>
                         }
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-8">
-        <div class="mr-1" style="background-color:#CBE7D3">
+        <div class="mr-1" style="margin-bottom:5px">
             <div class="form-view" id="updatePanel">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="float-md-right" style="margin-bottom:5px">
@@ -270,5 +279,161 @@
             </div>
 
         </div>
+
+        <div class="float-left"><button>Go to Graph</button></div>
+        <div class="float-right"><button>Go to Map</button></div>
+
     </div>
 </div>
+
+@section Scripts {
+    <script>
+
+        //$(function()
+        $(document).ready(function () {
+
+
+            $("#Productive ,#Resilent,#Moderate,#Active").click(function () {
+
+                //Productive
+                if ($('#Productive').is(":checked") == true) {
+                    $("#e_high").addClass("highlight");
+                    $("#c_low").addClass("highlight");
+                } else {
+
+                    $("#e_high").removeClass("highlight");
+                    $("#c_low").removeClass("highlight");
+
+                    if ($('#Moderate').is(":checked") == true) {
+                        $("#e_low").addClass("highlight");
+                        $("#c_low").addClass("highlight");
+                    }
+                    if ($('#Resilent').is(":checked") == true) {
+
+                        $("#e_high").addClass("highlight");
+                        $("#c_high").addClass("highlight");
+
+                    }
+                    if ($('#Active').is(":checked") == true) {
+
+                        $("#e_low").addClass("highlight");
+                        $("#c_high").addClass("highlight");
+                    }
+                }
+
+                //Resilent
+                if ($('#Resilent').is(":checked") == true) {
+
+                    $("#e_high").addClass("highlight");
+                    $("#c_high").addClass("highlight");
+
+                } else {
+                    $("#e_high").removeClass("highlight");
+                    $("#c_high").removeClass("highlight");
+
+                    if ($('#Productive').is(":checked") == true) {
+                        $("#e_high").addClass("highlight");
+                        $("#c_low").addClass("highlight");
+
+                    }
+                }
+
+                //Moderate
+                if ($('#Moderate').is(":checked") == true) {
+                    $("#e_low").addClass("highlight");
+                    $("#c_low").addClass("highlight");
+                } else {
+
+                    $("#e_low").removeClass("highlight");
+                    $("#c_low").removeClass("highlight");
+
+                    if ($('#Productive').is(":checked") == true) {
+                        $("#e_high").addClass("highlight");
+                        $("#c_low").addClass("highlight");
+
+                    }
+                    if ($('#Resilent').is(":checked") == true) {
+
+                        $("#e_high").addClass("highlight");
+                        $("#c_high").addClass("highlight");
+                    }
+                    if ($('#Active').is(":checked") == true) {
+
+                        $("#e_low").addClass("highlight");
+                        $("#c_high").addClass("highlight");
+                    }
+
+
+                }
+
+                //Active
+                if ($('#Active').is(":checked") == true) {
+
+                    $("#e_low").addClass("highlight");
+                    $("#c_high").addClass("highlight");
+                } else {
+
+                    $("#e_low").removeClass("highlight");
+                    $("#c_high").removeClass("highlight");
+
+                    if ($('#Productive').is(":checked") == true) {
+                        $("#e_high").addClass("highlight");
+                        $("#c_low").addClass("highlight");
+                    }
+                    if ($('#Moderate').is(":checked") == true) {
+                        $("#e_low").addClass("highlight");
+                        $("#c_low").addClass("highlight");
+                    }
+                    if ($('#Resilent').is(":checked") == true) {
+
+                        $("#e_high").addClass("highlight");
+                        $("#c_high").addClass("highlight");
+
+                    }
+                }
+            });
+
+
+            //$("#e_low").click(function () {
+
+            //    //alert("Clicked on image");
+            //    $("#e_low").css('background-color', '#3297FD');
+            //});
+
+            //$("#e_high").click(function () {
+
+            //    if ($("#e_high") && $("#c_high")) {
+
+            //    }
+
+            //    //alert("Clicked on image");
+            //    $("#e_high").css('background-color', '#3297FD');
+            //});
+            //$("#c_low").click(function () {
+            //    //alert("Clicked on image");
+            //    $("#c_low").css('background-color', '#3297FD');
+            //});
+            //$("#c_high").click(function () {
+            //    //alert("Clicked on image");
+            //    $("#c_high").css('background-color', '#3297FD');
+            //});
+
+        });
+
+                                                //function active() {
+                                                //    alert("OK");
+                                                //}
+
+                                                                    //Productive
+                                                                    //Resilent
+                                                                    //Moderate
+                                                                    //Active
+
+                                                                    //e_low
+                                                                    //e_high
+                                                                    //c_low
+                                                                    //c_high
+
+
+    </script>
+}
