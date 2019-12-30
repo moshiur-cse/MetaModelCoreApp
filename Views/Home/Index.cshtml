@@ -10,7 +10,7 @@
 
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "";
 }
 
 
@@ -102,6 +102,15 @@
             background: #3297FD;
             /*width:250px;*/
         }
+
+
+        .icon-map {
+            background-image: url(../images/map-icon.png);
+            background-size: cover;
+            display: inline-block;
+            height: 10%;
+            width: 10%;
+        }
     </style>
 }
 
@@ -111,13 +120,13 @@
             <div class="form-view" id="updatePanel">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
-                        <h3>Choose Senarios</h3>
+                        <h3><img style="height:10%;width:10%" src="~/images/cli_eco.png" />Choose Senarios</h3>
                         @*<table id="multi-form-view" class="table multi-form-view" >*@
                         <table>
                             <tr>
                                 <td width="250px" style="text-align:center;"></td>
                                 <td width="250px" style="text-align:center"></td>
-                                <td width="250px" colspan="1" style="text-align:center">Economic</td>
+                                <td width="250px" colspan="1" style="text-align: center">Economic</td>
                                 <td width="250px" style="text-align:center"></td>
                                 <td width="250px" style="text-align:center"></td>
                             </tr>
@@ -131,8 +140,8 @@
                                         <label class="custom-control-label" for="Productive" data-toggle="tooltip" data-placement="top" title="Productive">Productive</label>
                                     </div>
                                 </td>
-                                
-                                <td style="text-align: center;" > <label id="e_high"><img width="50" height="50" src="~/images/e_high.png" /></label></td>
+
+                                <td style="text-align: center;"> <label id="e_high"><img width="50" height="50" src="~/images/e_high.png" /></label></td>
                                 <td style="text-align: center; vertical-align: middle ">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="Resilent">
@@ -186,7 +195,7 @@
             <div class="form-view" id="updatePanel" style="margin-top:5px">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
-                        <h3>Stretegy</h3>
+                        <h3><img style="width:10%;height:10%" src="~/images/strategy.png" />Stretegy</h3>
                         <select class="form-control">
 
                             @foreach (Strategies aStrategy in ViewBag.Strategy)
@@ -203,7 +212,7 @@
             <div class="form-view" id="updatePanel" style="margin-top:5px">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
-                        <h3>Goals</h3>
+                        <h3><img style="width:10%;height:10%" src="~/images/goal.png" />Goals</h3>
 
                         @foreach (BdpGoals aStrategy in ViewBag.Goals)
                         {
@@ -275,16 +284,25 @@
                     <div style="text-align: center;">
                         <vc:pager paging-list="@Model" />
                     </div>
+
+
                 </div>
+              
             </div>
 
         </div>
 
-        <div class="float-left"><button>Go to Graph</button></div>
-        <div class="float-right"><button>Go to Map</button></div>
+        <div class="row">
+            <div  class="col-md-6">
+                <a href="" title="Go To Map"><img class="float-left" style="width:15%" src="~/images/map-icon.png" /></a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="" title="Go to Graph"><img class="float-right" style="width:15%" src="~/images/graph-icon.png" /></a>
+            </div>
+        </div>
 
     </div>
-</div>
 
 @section Scripts {
     <script>
@@ -420,19 +438,19 @@
 
         });
 
-                                                //function active() {
-                                                //    alert("OK");
-                                                //}
+                                                        //function active() {
+                                                        //    alert("OK");
+                                                        //}
 
-                                                                    //Productive
-                                                                    //Resilent
-                                                                    //Moderate
-                                                                    //Active
+                                                                            //Productive
+                                                                            //Resilent
+                                                                            //Moderate
+                                                                            //Active
 
-                                                                    //e_low
-                                                                    //e_high
-                                                                    //c_low
-                                                                    //c_high
+                                                                            //e_low
+                                                                            //e_high
+                                                                            //c_low
+                                                                            //c_high
 
 
     </script>
