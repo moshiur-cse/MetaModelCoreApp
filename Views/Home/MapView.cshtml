@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewData["Title"] = "MapView";
+}
+
+
+@section Styles {
+
+
+    <link href="~/lib/leaflet/leaflet.css" rel="stylesheet" />
+    <style>
+
+        .leaflet-popup-content {
+            width: auto !important;
+            min-width: 340px;
+        }
+
+        .leaflet-popup-close-button {
+            top: 2px !important;
+            right: 3px !important;
+        }
+
+        .checkbox > label {
+            margin-bottom: 4px;
+        }
+
+        .admin-bds {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+            .admin-bds > .row {
+                border-color: #ccc;
+                border-style: solid;
+                border-width: 0 0 1px 0;
+                margin: 0 3px 0 12px;
+                padding: 0;
+                /*background-color: #fcfeff;*/
+            }
+
+                .admin-bds > .row > [class*="col-"] {
+                    border: 0 none;
+                    margin: 0;
+                    padding: 3px;
+                }
+
+                .admin-bds > .row > [class*="col-sm-3"] {
+                    text-align: center;
+                }
+
+        #mapid {
+            height: 400px;
+        }
+    </style>
+
+}
+
+<div id="mapid"></div>
+
+@section Scripts {
+
+    @*access token : pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazE0Z3R3eHowaW1xM21weW9lc283ODR5In0.CVXnj83FaFxqx897botGig*@
+
+    <script src="~/lib/leaflet/leaflet.js"></script>
+
+    <script>
+
+
+        var mymap = L.map('mapid').setView([23.777176, 90.399452], 7);
+
+        //var mymap = L.map('mapid').setView([-104.03, 45.94], 7);
+
+
+
+        //var mymap = new L.Map('mapid', {center: new L.LatLng(51.51, -0.11), zoom: 9});
+
+        //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/512/1/1/0@2x?access_token=pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng', {
+        //    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        //    maxZoom: 24,
+        //    id: 'mapbox/streets-v11',
+        //    accessToken: 'pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng'
+        //}).addTo(mymap);
+
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 14,
+            id: 'MapID',
+            // accessToken: 'pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng'
+        }).addTo(mymap);
+
+
+
+        //var googleLayer = new L.Google('ROADMAP');
+        //mymap.addLayer(googleLayer);
+
+
+        //var marker = L.marker([23.777176, 90.399452]).addTo(mymap);
+
+        //var circle = L.circle([23.77, 90.3], {
+        //    color: 'red',
+        //    fillColor: '#f03',
+        //    fillOpacity: 0.5,
+        //    radius: 500
+        //}).addTo(mymap);
+
+        //var dataLayerPath = "../js/maps/map_data/" + dataAdminCode + ".json",
+
+        //var dataLayerPath = "../js/maps/map_data/div.json";
+
+        //console.log(dataLayerPath);
+
+
+
+
+        //var polygon = L.polygon([
+        //    [23.77, 90.39],
+        //    [23.777, 90.399],
+        //    [23.7771, 90.3994]
+        //]).addTo(mymap);
+
+
+        //RMO
+        //var data = $.getJSON("../maps/map_data/Division.json");
+
+        var geojson;
+
+        $.getJSON('../maps/map_data/Division.json', function (data1) {
+
+            geojson = data1;
+            
+        });
+        
+        console.log("OK", geojson['features']);
+
+
+        //console.log("OK", JSON.parse(geojson));
+        //$.getJSON('https://raw.githubusercontent.com/moshiur-cegis/jsonData/master/DistrictWGS.json', function (data) {
+        //    console.log("OK", data);
+        //});
+
+
+        L.geoJSON(geojson.features, {
+            style: function (feature) {
+                switch (feature.properties.party) {
+                    case 'Republican': return { color: "#ff0000" };
+                    case 'Democrat': return { color: "#0000ff" };
+                }
+            }
+        }).addTo(mymap);
+
+        //../js/maps/map_data/
+
+        //$.getJSON("test.json");
+
+        //console.log("OK",geojson);
+
+
+        var states = [{
+            "type": "Feature",
+            "properties": { "party": "Republican" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-104.05, 48.99],
+                    [-97.22, 48.98],
+                    [-96.58, 45.94],
+                    [-104.03, 45.94],
+                    [-104.05, 48.99]
+                ]]
+            }
+        }, {
+            "type": "Feature",
+            "properties": { "party": "Democrat" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [-109.05, 41.00],
+                    [-102.06, 40.99],
+                    [-102.03, 36.99],
+                    [-109.04, 36.99],
+                    [-109.05, 41.00]
+                ]]
+            }
+        }];
+
+        //console.log("OK",states);
+
+        L.geoJSON(states, {
+            style: function (feature) {
+                switch (feature.properties.party) {
+                    case 'Republican': return { color: "#ff0000" };
+                    case 'Democrat': return { color: "#0000ff" };
+                }
+            }
+        }).addTo(mymap);
+
+
+
+
+
+                //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+                //circle.bindPopup("I am a circle.");
+                //polygon.bindPopup("I am a polygon.");
+
+
+    </script>
+    @*/styles/v1/{username}/{style_id}/tiles/{tilesize}/{z}/{x}/{y}{@2x}*@
+
+}

@@ -62,6 +62,11 @@ namespace MetaModelCoreApp.Controllers
             return View();
         }
 
+        public IActionResult MapView()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
