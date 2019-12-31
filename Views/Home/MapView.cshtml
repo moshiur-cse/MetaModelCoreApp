@@ -63,7 +63,9 @@
     @*access token : pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazE0Z3R3eHowaW1xM21weW9lc283ODR5In0.CVXnj83FaFxqx897botGig*@
 
     <script src="~/lib/leaflet/leaflet.js"></script>
-
+    <script src="~/maps/map_data/Division1.js"></script>
+   
+    <script src="~/maps/map_data/DistrictWGS.js"></script>
     <script>
 
 
@@ -131,7 +133,7 @@
             
         });
         
-        console.log("OK", geojson['features']);
+        console.log("OK", district.features);
 
 
         //console.log("OK", JSON.parse(geojson));
@@ -140,7 +142,7 @@
         //});
 
 
-        L.geoJSON(geojson.features, {
+        L.geoJSON(district.features, {
             style: function (feature) {
                 switch (feature.properties.party) {
                     case 'Republican': return { color: "#ff0000" };
