@@ -89,7 +89,12 @@
             <div class="form-view" id="updatePanel">
                 <div id="multi-form-wrapper" class="data-view multi-form-wrapper">
                     <div class="mr-1">
-                        <h3>Selection Panel</h3>
+                        <h3>Select Admin Boundary</h3>
+                        <select class="form-control" id="boundary">
+                            <option value="division">Division</option>
+                            <option value="district" selected>District</option>
+                            <option value="upazila">Upazila</option>
+                        </select>
                     </div>
 
 
@@ -120,65 +125,79 @@
 
     <script src="~/lib/leaflet/leaflet.js"></script>
     @*<script src="~/maps/map_data/Division1.js"></script>*@
-    @*<script src="~/maps/map_data/boundary/division.js"></script>*@
+    <script src="~/maps/map_data/boundary/division.js"></script>
     @*<script src="~/maps/map_data/boundary/district.js"></script>*@
-    @*<script src="~/maps/map_data/boundary/upazila.js"></script>*@
+    <script src="~/maps/map_data/boundary/upazila.js"></script>
 
     @*<script src="~/maps/map_data/boundary/upazilaMain.js"></script>*@
     <script src="~/maps/map_data/boundary/District_WGS84.js"></script>
     @*<script src="~/maps/map_data/districtMain.js"></script>*@
     <script>
 
+        //var boundary = $("#boundary").val();
+
+        var boundary = district;
         var geojson;
         var mymap = L.map('mapid').setView([23.777176, 90.399452], 6);
-
-
-        //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/512/1/1/0@2x?access_token=pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng', {
-        //    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        //    maxZoom: 24,
-        //    id: 'mapbox/streets-v11',
-        //    accessToken: 'pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng'
-        //}).addTo(mymap);
-
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 14,
-            id: 'MapID',
-            // accessToken: 'pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng'
-        }).addTo(mymap);
+        var legend = L.control({ position: 'bottomright' });
+        var info = L.control();
 
 
 
+        mapLoad();
+        legendAndInfo();
+
+        $("#boundary").change(function () {
+
+            if ($("#boundary").val() == "division") {
+                boundary = division;
+            } else if ($("#boundary").val() == "upazila") {
+                boundary = upazila;
+            } else {
+                boundary = district;
+            }
+
+            mymap.eachLayer(function (layer) {
+                mymap.removeLayer(layer);
+            });
 
 
-        //console.log("OK", district.features);
+            mapLoad();
+            legendAndInfo();
 
-        //upazila.features[0].properties.THACODE
-
-        //for (var i = 0; i < district.features.length; i++) {
-        //    console.log("Thana Code: ", district.features[i].properties.TOTAL);
-        //}
+        });
 
 
 
-        //L.geoJSON(upazila.features, {
-        //    style: function (feature) {
+        function mapLoad() {
+            //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/512/1/1/0@2x?access_token=pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng', {
+            //    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            //    maxZoom: 24,
+            //    id: 'mapbox/streets-v11',
+            //    accessToken: 'pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazExcGZ4bjAwaXltM2NyaDdhajlyd2FkIn0.c_SEmtkCpdNmBpogXYkUng'
+            //}).addTo(mymap);
 
-        //        switch (feature.properties.party) {
-        //            case 'Republican': return { color: "#ff0000" };
-        //            case 'Democrat': return { color: "#0000ff" };
-        //        }
-        //    },
-
-        //}).addTo(mymap);
-
-
-        geojson = L.geoJson(district.features, {
-            style: style,
-            onEachFeature: onEachFeature
-        }).addTo(mymap);
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 14,
+                id: 'MapID',
+            }).addTo(mymap);
 
 
+
+            //for (var i = 0; i < district.features.length; i++) {
+            //    console.log("Thana Code: ", district.features[i].properties.TOTAL);
+            //}
+
+
+            geojson = L.geoJson(boundary.features, {
+                style: style,
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+
+
+
+
+        }
 
         function getColor(d) {
             return d > 1500000 ? '#800026' :
@@ -234,19 +253,10 @@
         }
 
         function resetHighlight(e) {
-            //style(e.target);
 
-
-            //layer.setStyle({
-            //    weight: 5,
-            //    color: '#f00',
-            //    dashArray: '',
-            //    fillOpacity: 0.7
-            //});
             geojson.resetStyle(e.target);
             info.update();
 
-            //sdfdsf
 
         }
 
@@ -255,57 +265,51 @@
         }
 
 
-        var legend = L.control({ position: 'bottomright' });
 
-        legend.onAdd = function (map) {
-
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1500000],
-                labels = [];
-
-            // loop through our density intervals and generate a label with a colored square for each interval
-
-            for (var i = 0; i < grades.length; i++) {
-
-                div.innerHTML +=
-                    '<p><i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-
-                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</p>' : '+');
-            }
-
-            return div;
-        };
-
-        legend.addTo(mymap);
+        function legendAndInfo() {
 
 
-        //Pop Up Window
+            legend.onAdd = function (map) {
 
-        var info = L.control();
+                var div = L.DomUtil.create('div', 'info legend'),
+                    grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1500000],
+                    labels = [];
 
-        info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-            this.update();
-            return this._div;
-        };
+                // loop through our density intervals and generate a label with a colored square for each interval
 
-        // method that we will use to update the control based on feature properties passed
+                for (var i = 0; i < grades.length; i++) {
 
-        info.update = function (props) {
-            this._div.innerHTML = '<h6>Bangladesh Populatoin</h6>' + (props ?
-                '<b>' + props.DISTNAME + '</b> : ' + props.TOTAL + ' people'  /// mi<sup>2</sup>
-                : 'Hover over a district');
-        };
+                    div.innerHTML +=
+                        '<p><i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
 
+                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</p>' : '+');
+                }
 
-        info.addTo(mymap);
+                return div;
+            };
 
-                                                                                                                                                                //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-                                                                                                                                                                //circle.bindPopup("I am a circle.");
-                                                                                                                                                                //polygon.bindPopup("I am a polygon.");
+            legend.addTo(mymap);
 
 
+            //Pop Up Window
+
+            info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this.update();
+                return this._div;
+            };
+
+            // method that we will use to update the control based on feature properties passed
+
+            info.update = function (props) {
+                this._div.innerHTML = '<h6>Bangladesh Populatoin</h6>' + (props ?
+                    '<b>' + props.DISTNAME + '</b> : ' + props.TOTAL + ' people'  /// mi<sup>2</sup>
+                    : 'Hover over a district');
+            };
+
+            info.addTo(mymap);
+        }
+
+                                                                                                                                                                                        //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     </script>
-
-
 }
