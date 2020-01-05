@@ -27,6 +27,7 @@ namespace MetaModelCoreApp.Models
         public virtual DbSet<GeoDivisions> GeoDivisions { get; set; }
         public virtual DbSet<GeoUpazilas> GeoUpazilas { get; set; }
         public virtual DbSet<Indicator> Indicator { get; set; }
+        public virtual DbSet<LegendInfo> LegendInfo { get; set; }
         public virtual DbSet<LossTypes> LossTypes { get; set; }
         public virtual DbSet<Ministries> Ministries { get; set; }
         public virtual DbSet<MinistryProjects> MinistryProjects { get; set; }
@@ -445,6 +446,19 @@ namespace MetaModelCoreApp.Models
                     .HasMaxLength(1000);
 
                 entity.Property(e => e.Unit).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<LegendInfo>(entity =>
+            {
+                entity.ToTable("legend_info");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.LegendColor)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.LengentName).HasMaxLength(50);
             });
 
             modelBuilder.Entity<LossTypes>(entity =>

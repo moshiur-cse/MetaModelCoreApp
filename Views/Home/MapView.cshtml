@@ -119,6 +119,9 @@
 </div>
 
 
+
+
+
 @section Scripts {
 
     @*access token : pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazE0Z3R3eHowaW1xM21weW9lc283ODR5In0.CVXnj83FaFxqx897botGig*@
@@ -135,17 +138,58 @@
     <script>
 
         //var boundary = $("#boundary").val();
-
+        $(function () {
         var boundary = district;
         var geojson;
         var mymap = L.map('mapid').setView([23.777176, 90.399452], 6);
         var legend = L.control({ position: 'bottomright' });
         var info = L.control();
+        var legendStartRange = [];
+        var legendEndRange = [];
+        var legendColor = [];
+
+        //console.log("Color List"+legendColor);
+            var legendId = 1;
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetLegendInfo")",
+                    dataType: "json",
+                    data: { legendId: legendId },
+                    //before: $("#busy-indicator").fadeIn(150),
+                    success: function (data) {
+                        //alert(LegendInfo);
+
+                        //console.log(data);
+                        $.each(data, function (i, items) {
+
+                            legendStartRange.push(items.startRange)
+                            legendEndRange.push(items.endRange);
+                            legendColor.push(items.legendColor)
+
+
+                            //lengentName = i.LengentName,
+                            //lengentNameId = i.LengentNameId,
+                            //startRange=i.StartRange,
+                            //endRange=i.EndRange,
+                            //legendColor=i.LegendColor
+
+                            //alert(i+" : "+items.lengentName);
+                            //$("<option />").val(circle.value).html(circle.text).appendTo($circle);
+                        });
+                            mapLoad();
+                            legendAndInfo();
+
+
+                    },
+                    error: function (ex) {
+                        window.msg.init("error", "Error... . . !", "Failed to load circle list. " + ex.error);
+                    },
+                    //complete: $("#busy-indicator").fadeOut(150)
+                });
 
 
 
-        mapLoad();
-        legendAndInfo();
+
 
         $("#boundary").change(function () {
 
@@ -161,11 +205,10 @@
                 mymap.removeLayer(layer);
             });
 
-
             mapLoad();
             legendAndInfo();
-
         });
+
 
 
 
@@ -199,23 +242,42 @@
 
         }
 
-        function getColor(d) {
-            return d > 1500000 ? '#800026' :
-                d > 1400000 ? '#BD0026' :
-                    d > 1200000 ? '#E31A1C' :
-                        d > 1000000 ? '#FC4E2A' :
-                            d > 800000 ? '#FD8D3C' :
-                                d > 600000 ? '#FEB24C' :
-                                    d > 400000 ? '#FED976' :
-                                        '#FFEDA0';
-        }
+            function getColor(d) {
+                for (var i = 0; i < legendColor.length; i++) {
+
+                    if (d > legendStartRange[i] && d < legendEndRange[i]) {
+                        return legendColor[i];
+                    } else if (d > legendEndRange[legendColor.length - 1]) {
+
+                        return legendColor[legendColor.length - 1];
+                    }
+                }
+
+               // legendRange
+
+
+
+
+            //return d > 1400001 ? '#BD0026' :
+            //        d > 1200001 ? '#E31A1C' :
+            //            d > 1000001 ? '#FC4E2A' :
+            //                d > 800001 ? '#FD8D3C' :
+            //                    d > 600001 ? '#FEB24C' :
+            //                        d > 400001 ? '#FED976' :
+            //                        '#FFEDA0';
+
+
+
+
+            }
+
 
 
         // grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1500000],
 
         function style(feature) {
 
-            console.log("feature", feature);
+            //console.log("feature", feature);
             return {
                 fillColor: getColor(feature.properties.TOTAL),
                 weight: 1,
@@ -268,21 +330,24 @@
 
         function legendAndInfo() {
 
+            //var grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000];
+
+            var grades = legendStartRange;
+
+            //legendStartRange.push(items.startRange)
+            //legendEndRange.push(items.endRange);
 
             legend.onAdd = function (map) {
 
-                var div = L.DomUtil.create('div', 'info legend'),
-                    grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1500000],
-                    labels = [];
+                var div = L.DomUtil.create('div', 'info legend');
 
                 // loop through our density intervals and generate a label with a colored square for each interval
 
                 for (var i = 0; i < grades.length; i++) {
 
-                    div.innerHTML +=
-                        '<p><i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    div.innerHTML +='<p><i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
 
-                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</p>' : '+');
+                                   grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</p>' : '+');
                 }
 
                 return div;
@@ -309,7 +374,7 @@
 
             info.addTo(mymap);
         }
-
+ });
                                                                                                                                                                                         //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     </script>
 }

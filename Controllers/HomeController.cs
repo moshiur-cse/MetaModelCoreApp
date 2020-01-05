@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using MetaModelCoreApp.Models;
 using ReflectionIT.Mvc.Paging;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetaModelCoreApp.Controllers
 {
@@ -39,7 +40,7 @@ namespace MetaModelCoreApp.Controllers
             ViewBag.Senario = _context.Senarios.ToList();
             ViewBag.Strategy = _context.Strategies.ToList();
             ViewBag.Goals = _context.BdpGoals.ToList();
-            
+
             var qry = _context.CropLoss.Take(100);
 
             if (filter != null)
@@ -47,7 +48,7 @@ namespace MetaModelCoreApp.Controllers
                 qry = qry.Where(p => p.RunCode == filter);
             }
 
-            var model = await PagingList.CreateAsync(qry,10,pageIndex, sortExpression, "RunCode");
+            var model = await PagingList.CreateAsync(qry, 10, pageIndex, sortExpression, "RunCode");
 
             model.RouteValue = new RouteValueDictionary { { "filter", filter } };
 
@@ -64,7 +65,37 @@ namespace MetaModelCoreApp.Controllers
 
         public IActionResult MapView()
         {
+            ViewBag.LegendInfo = _context.LegendInfo.ToList();
+
             return View();
+        }
+
+
+
+
+        public JsonResult GetLegendInfo(int legendId)
+        {
+            var legendInfo = _context.LegendInfo.Where(i=>i.LengentNameId== legendId).Select(i=>new {
+
+                lengentName = i.LengentName,
+                lengentNameId = i.LengentNameId,
+                startRange=i.StartRange,
+                endRange=i.EndRange,
+                legendColor=i.LegendColor
+
+            }).ToList();
+
+            return Json(legendInfo);
+        }
+
+        private JsonResult Json(DbSet<LegendInfo> legendInfo, object allowGet)
+        {
+            throw new NotImplementedException();
+        }
+
+        private JsonResult Json(object projectName, object allowGet)
+        {
+            throw new NotImplementedException();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
