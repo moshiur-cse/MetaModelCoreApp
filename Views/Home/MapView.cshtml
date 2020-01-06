@@ -127,14 +127,9 @@
     @*access token : pk.eyJ1IjoibW9zaGl1cmNzZSIsImEiOiJjazE0Z3R3eHowaW1xM21weW9lc283ODR5In0.CVXnj83FaFxqx897botGig*@
 
     <script src="~/lib/leaflet/leaflet.js"></script>
-    @*<script src="~/maps/map_data/Division1.js"></script>*@
     <script src="~/maps/map_data/boundary/division.js"></script>
-    @*<script src="~/maps/map_data/boundary/district.js"></script>*@
     <script src="~/maps/map_data/boundary/upazila.js"></script>
-
-    @*<script src="~/maps/map_data/boundary/upazilaMain.js"></script>*@
     <script src="~/maps/map_data/boundary/District_WGS84.js"></script>
-    @*<script src="~/maps/map_data/districtMain.js"></script>*@
     <script>
 
         //var boundary = $("#boundary").val();
@@ -157,24 +152,10 @@
                     data: { legendId: legendId },
                     //before: $("#busy-indicator").fadeIn(150),
                     success: function (data) {
-                        //alert(LegendInfo);
-
-                        //console.log(data);
                         $.each(data, function (i, items) {
-
                             legendStartRange.push(items.startRange)
                             legendEndRange.push(items.endRange);
                             legendColor.push(items.legendColor)
-
-
-                            //lengentName = i.LengentName,
-                            //lengentNameId = i.LengentNameId,
-                            //startRange=i.StartRange,
-                            //endRange=i.EndRange,
-                            //legendColor=i.LegendColor
-
-                            //alert(i+" : "+items.lengentName);
-                            //$("<option />").val(circle.value).html(circle.text).appendTo($circle);
                         });
                             mapLoad();
                             legendAndInfo();
@@ -248,7 +229,6 @@
                     if (d > legendStartRange[i] && d < legendEndRange[i]) {
                         return legendColor[i];
                     } else if (d > legendEndRange[legendColor.length - 1]) {
-
                         return legendColor[legendColor.length - 1];
                     }
                 }
@@ -332,7 +312,7 @@
 
             //var grades = [0, 400000, 600000, 800000, 1000000, 1200000, 1400000];
 
-            var grades = legendStartRange;
+            //var grades = legendStartRange;
 
             //legendStartRange.push(items.startRange)
             //legendEndRange.push(items.endRange);
@@ -343,11 +323,17 @@
 
                 // loop through our density intervals and generate a label with a colored square for each interval
 
-                for (var i = 0; i < grades.length; i++) {
+                for (var i = 0; i < legendColor.length; i++) {
 
-                    div.innerHTML +='<p><i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    div.innerHTML +='<p><i style="background:' + legendColor[i] + '"></i> ' +
 
-                                   grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</p>' : '+');
+                                   legendStartRange[i] + (legendEndRange[i+1] ? '&ndash;' + legendEndRange[i] + '</p>' : '+');
+
+                    //div.innerHTML +='<p><i style="background:' + legendColor[i] + '"></i> ' +
+
+                    //               legendStartRange[i]+ "-"+legendEndRange[i] + '</p>';
+
+
                 }
 
                 return div;

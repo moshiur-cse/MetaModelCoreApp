@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MetaModelCoreApp.Models.LegendInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LengentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LengentNameId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartRange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndRange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LegendColor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LengentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LengentNameId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LegendColor)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

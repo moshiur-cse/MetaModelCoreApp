@@ -1,0 +1,48 @@
+﻿@model MetaModelCoreApp.Models.LegendInfo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>LegendInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LengentName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LengentName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LengentNameId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LengentNameId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartRange)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartRange)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndRange)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndRange)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LegendColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LegendColor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
