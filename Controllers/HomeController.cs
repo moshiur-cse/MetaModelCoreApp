@@ -83,7 +83,7 @@ namespace MetaModelCoreApp.Controllers
                 endRange=i.EndRange,
                 legendColor=i.LegendColor
 
-            }).ToList();
+            }).OrderBy(i=>i.startRange).ToList();
 
             return Json(legendInfo);
         }

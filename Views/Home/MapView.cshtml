@@ -207,20 +207,14 @@
             }).addTo(mymap);
 
 
-
             //for (var i = 0; i < district.features.length; i++) {
             //    console.log("Thana Code: ", district.features[i].properties.TOTAL);
             //}
-
 
             geojson = L.geoJson(boundary.features, {
                 style: style,
                 onEachFeature: onEachFeature
             }).addTo(mymap);
-
-
-
-
         }
 
             function getColor(d) {
