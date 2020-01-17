@@ -41,7 +41,7 @@ namespace MetaModelCoreApp.Controllers
             ViewBag.Strategy = _context.Strategies.ToList();
             ViewBag.Goals = _context.BdpGoals.ToList();
 
-            var qry = _context.CropLoss.Take(100);
+            var qry = _context.CropLoss.AsNoTracking().Take(100);
 
             if (filter != null)
             {
